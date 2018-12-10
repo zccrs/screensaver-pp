@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220">
+  <defs>
+    <radialGradient id="shadow-a" cx="53.756%" cy="64.019%" r="41.402%" fx="53.756%" fy="64.019%" gradientTransform="matrix(0 -1 .99181 0 -.097 1.178)">
+      <stop offset="0%" stop-color="#FFB" stop-opacity=".5"/>
+      <stop offset="100%" stop-opacity=".5"/>
+    </radialGradient>
+    <filter id="shadow-b" width="116%" height="123.4%" x="-8%" y="-11.7%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+    </filter>
+  </defs>
+  <path fill="url(#shadow-a)" fill-rule="evenodd" d="M2.19782932,36.4893984 C13.1635151,64.3115254 40.2825127,84 72,84 C113.421356,84 147,50.4213562 147,9 C147,7.15386179 146.933297,5.32330282 146.802171,3.51060164 C150.157089,12.022697 152,21.296131 152,31 C152,72.4213562 118.421356,106 77,106 C37.4247837,106 5.00876357,75.3478378 2.19782971,36.4894036 Z" filter="url(#shadow-b)" transform="rotate(2 -2768.4 1193.265)"/>
+</svg>

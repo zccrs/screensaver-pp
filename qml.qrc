@@ -1,8 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>pp.png</file>
         <file>TheForce.qml</file>
         <file>DebugArea.qml</file>
+        <file>pp.svg</file>
+        <file>shadow.svg</file>
+        <file>pp.png</file>
     </qresource>
 </RCC>

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="150" height="153" viewBox="0 0 150 153">
+  <defs>
+    <radialGradient id="bubble-b" r="53.185%" fx="50%" fy="50%">
+      <stop offset="0%" stop-opacity="0"/>
+      <stop offset="48.296%" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#2BF2EC" stop-opacity=".302"/>
+    </radialGradient>
+    <linearGradient id="bubble-c" x1="100%" x2="72.465%" y1="50%" y2="59.176%">
+      <stop offset="0%" stop-color="#FFF805" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#FFF114" stop-opacity="0"/>
+    </linearGradient>
+    <circle id="bubble-a" cx="97" cy="97" r="75"/>
+    <filter id="bubble-d" width="127.3%" height="127.3%" x="-13.7%" y="-13.7%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="7.5"/>
+      <feOffset dx="-13" dy="-26" in="shadowBlurInner1" result="shadowOffsetInner1"/>
+      <feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"/>
+      <feColorMatrix in="shadowInnerInner1" result="shadowMatrixInner1" values="0 0 0 0 0.0745098039   0 0 0 0 0.0470588235   0 0 0 0 0  0 0 0 0.1 0"/>
+      <feGaussianBlur in="SourceAlpha" result="shadowBlurInner2" stdDeviation="8"/>
+      <feOffset dy="18" in="shadowBlurInner2" result="shadowOffsetInner2"/>
+      <feComposite in="shadowOffsetInner2" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner2"/>
+      <feColorMatrix in="shadowInnerInner2" result="shadowMatrixInner2" values="0 0 0 0 1   0 0 0 0 0.894117647   0 0 0 0 0.294117647  0 0 0 0.8 0"/>
+      <feGaussianBlur in="SourceAlpha" result="shadowBlurInner3" stdDeviation="8"/>
+      <feOffset dy="-18" in="shadowBlurInner3" result="shadowOffsetInner3"/>
+      <feComposite in="shadowOffsetInner3" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner3"/>
+      <feColorMatrix in="shadowInnerInner3" result="shadowMatrixInner3" values="0 0 0 0 0.819607843   0 0 0 0 0.294117647   0 0 0 0 1  0 0 0 0.8 0"/>
+      <feGaussianBlur in="SourceAlpha" result="shadowBlurInner4" stdDeviation="5.5"/>
+      <feOffset in="shadowBlurInner4" result="shadowOffsetInner4"/>
+      <feComposite in="shadowOffsetInner4" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner4"/>
+      <feColorMatrix in="shadowInnerInner4" result="shadowMatrixInner4" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.7 0"/>
+      <feMorphology in="SourceAlpha" radius="1" result="shadowSpreadInner5"/>
+      <feGaussianBlur in="shadowSpreadInner5" result="shadowBlurInner5" stdDeviation="1"/>
+      <feOffset dy="2" in="shadowBlurInner5" result="shadowOffsetInner5"/>
+      <feComposite in="shadowOffsetInner5" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner5"/>
+      <feColorMatrix in="shadowInnerInner5" result="shadowMatrixInner5" values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.7 0"/>
+      <feMerge>
+        <feMergeNode in="shadowMatrixInner1"/>
+        <feMergeNode in="shadowMatrixInner2"/>
+        <feMergeNode in="shadowMatrixInner3"/>
+        <feMergeNode in="shadowMatrixInner4"/>
+        <feMergeNode in="shadowMatrixInner5"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="bubble-e" cx="31.699%" cy="8.32%" r="44.906%" fx="31.699%" fy="8.32%">
+      <stop offset="0%" stop-color="#FFF"/>
+      <stop offset="100%" stop-color="#FFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="bubble-f" width="112.9%" height="112.9%" x="-6.5%" y="-6.5%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+    </filter>
+    <radialGradient id="bubble-g" cx="21.961%" cy="12.724%" r="33.704%" fx="21.961%" fy="12.724%">
+      <stop offset="0%" stop-color="#FFF"/>
+      <stop offset="100%" stop-color="#FFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="bubble-h" width="104.3%" height="104.3%" x="-2.2%" y="-2.2%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1"/>
+    </filter>
+    <radialGradient id="bubble-i" cx="31.699%" cy="8.32%" r="50.468%" fx="31.699%" fy="8.32%">
+      <stop offset="0%" stop-color="#4FDDFF"/>
+      <stop offset="100%" stop-color="#BB3FFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="bubble-j" width="112.9%" height="112.9%" x="-6.5%" y="-6.5%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+    </filter>
+    <filter id="bubble-k" width="112.9%" height="112.9%" x="-6.5%" y="-6.5%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+    </filter>
+    <linearGradient id="bubble-l" x1="50%" x2="55.575%" y1="0%" y2="45.834%">
+      <stop offset="0%" stop-color="#FFF"/>
+      <stop offset="100%" stop-color="#FFF" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="bubble-m" cx="22.29%" cy="7.285%" r="62.055%" fx="22.29%" fy="7.285%">
+      <stop offset="0%" stop-color="#FFF"/>
+      <stop offset="100%" stop-color="#FFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bubble-n" cx="31.699%" cy="8.32%" r="66.105%" fx="31.699%" fy="8.32%" gradientTransform="matrix(.9926 .1212 -.12139 .9911 .012 -.038)">
+      <stop offset="0%" stop-color="#FFF344" stop-opacity=".985"/>
+      <stop offset="100%" stop-color="#ECFF05" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="bubble-o" width="113%" height="112.9%" x="-6.5%" y="-6.5%" filterUnits="objectBoundingBox">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(-22 -21)">
+    <use fill="#000" fill-opacity=".1" xlink:href="#bubble-a"/>
+    <use fill="url(#bubble-b)" xlink:href="#bubble-a"/>
+    <use fill="url(#bubble-c)" xlink:href="#bubble-a"/>
+    <use fill="#000" filter="url(#bubble-d)" xlink:href="#bubble-a"/>
+    <path fill="url(#bubble-e)" d="M58.6459101,155.133208 C67.4546068,160.140356 77.6433505,163 88.5,163 C121.913227,163 149,135.913227 149,102.5 C149,69.0867726 121.913227,42 88.5,42 C55.894975,42 29.3140564,67.7922651 28.0472487,100.086791 C28.0158409,99.2284073 28,98.3660536 28,97.5 C28,59.1162099 59.1162099,28 97.5,28 C135.88379,28 167,59.1162099 167,97.5 C167,135.88379 135.88379,167 97.5,167 C83.1078179,167 69.7373924,162.62534 58.6459101,155.133208 Z" filter="url(#bubble-f)"/>
+    <path fill="url(#bubble-g)" d="M58.6459101,155.133208 C67.4546068,160.140356 77.6433505,163 88.5,163 C121.913227,163 149,135.913227 149,102.5 C149,69.0867726 121.913227,42 88.5,42 C55.894975,42 29.3140564,67.7922651 28.0472487,100.086791 C28.0158409,99.2284073 28,98.3660536 28,97.5 C28,59.1162099 59.1162099,28 97.5,28 C135.88379,28 167,59.1162099 167,97.5 C167,135.88379 135.88379,167 97.5,167 C83.1078179,167 69.7373924,162.62534 58.6459101,155.133208 Z" filter="url(#bubble-h)"/>
+    <path fill="url(#bubble-i)" d="M58.6459101,155.133208 C67.4546068,160.140356 77.6433505,163 88.5,163 C121.913227,163 149,135.913227 149,102.5 C149,69.0867726 121.913227,42 88.5,42 C55.894975,42 29.3140564,67.7922651 28.0472487,100.086791 C28.0158409,99.2284073 28,98.3660536 28,97.5 C28,59.1162099 59.1162099,28 97.5,28 C135.88379,28 167,59.1162099 167,97.5 C167,135.88379 135.88379,167 97.5,167 C83.1078179,167 69.7373924,162.62534 58.6459101,155.133208 Z" filter="url(#bubble-j)" transform="rotate(-180 97.5 97.5)"/>
+    <path fill="url(#bubble-i)" d="M58.6459101,155.133208 C67.4546068,160.140356 77.6433505,163 88.5,163 C121.913227,163 149,135.913227 149,102.5 C149,69.0867726 121.913227,42 88.5,42 C55.894975,42 29.3140564,67.7922651 28.0472487,100.086791 C28.0158409,99.2284073 28,98.3660536 28,97.5 C28,59.1162099 59.1162099,28 97.5,28 C135.88379,28 167,59.1162099 167,97.5 C167,135.88379 135.88379,167 97.5,167 C83.1078179,167 69.7373924,162.62534 58.6459101,155.133208 Z" filter="url(#bubble-k)" transform="rotate(-180 97.5 97.5)"/>
+    <circle cx="91" cy="89" r="57" fill="url(#bubble-l)"/>
+    <circle cx="91" cy="89" r="57" fill="url(#bubble-m)" opacity=".5"/>
+    <circle cx="91" cy="89" r="57" fill="url(#bubble-m)" opacity=".5"/>
+    <path fill="url(#bubble-n)" d="M60.3074152,156.366758 C68.5136865,160.526901 77.7961325,162.871281 87.6261376,162.871281 C121.039365,162.871281 148.126138,135.784508 148.126138,102.371281 C148.126138,68.9580532 121.039365,41.8712805 87.6261376,41.8712805 C57.7269757,41.8712805 32.8935385,63.5602261 28.0007846,92.0631588 C30.7803878,56.2265499 60.7404945,28.0128277 97.290269,28.0128277 C135.674059,28.0128277 166.790269,59.1290376 166.790269,97.5128277 C166.790269,135.896618 135.674059,167.012828 97.290269,167.012828 C83.6984014,167.012828 71.0178149,163.111169 60.3074152,156.366758 Z" filter="url(#bubble-o)" transform="rotate(-145 97.396 97.513)"/>
+  </g>
+</svg>

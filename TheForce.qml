@@ -43,12 +43,15 @@ Affector {
     property real velocityFactor: 1.1
     // 每次碰撞减少的生命值，单位为秒
     property real lifeElapse: 2
+    // 忽略粒子的margins，取值范围为 0-1，忽略的像素 = particleMargins * particle.startSize
+    // 在任何需要使用粒子大小的地方都会减去此margins
+    property real particleMargins: 0
     // 用于计算粒子之间的碰撞信息，求最大碰撞深度（两个物体重合部分的最大宽度），并且返回碰撞点
     // 默认的方法是用来处理圆形
     property var intersectInfo: function intersectSize(c1, c2) {
         // 圆心的距离
         var pd = Qt.vector2d(c1.x - c2.x, c1.y - c2.y).length();
-        var depth = (c2.startSize + c1.startSize) / 2 - pd;
+        var depth = (d_ptr.particleSize(c2) + d_ptr.particleSize(c1)) / 2 - pd;
 
         // 圆之间未相交时直接返回
         if (depth <= 0) {
@@ -57,8 +60,8 @@ Affector {
 
         return {
             "depth": depth,
-            "point": Qt.point(c2.x - (c2.x - c1.x) * c2.startSize / pd / 2,
-                              c2.y - (c2.y - c1.y) * c2.startSize / pd / 2)
+            "point": Qt.point(c2.x - (c2.x - c1.x) * d_ptr.particleSize(c2) / pd / 2,
+                              c2.y - (c2.y - c1.y) * d_ptr.particleSize(c2) / pd / 2)
         }
     }
 
@@ -70,6 +73,10 @@ Affector {
 
         // 为粒子分配 id
         property int particleId: 0
+
+        function particleSize(particle) {
+            return particle.startSize * (1 - particleMargins);
+        }
 
         function rectContains(rect, point) {
             return rect.x <= point.x && rect.y <= point.y && rect.right >= point.x && rect.bottom >= point.y;
@@ -143,8 +150,8 @@ Affector {
                 // 所以，粒子p在x y方向上所携带的动能为(用矢量表示)：
                 var p1px = Qt.vector2d(particle.vx, 0);
                 var p1py = Qt.vector2d(0, particle.vy);
-                var p2px = Qt.vector2d(p2.vx * p2.startSize / particle.startSize, 0);
-                var p2py = Qt.vector2d(0, p2.vy * p2.startSize / particle.startSize);
+                var p2px = Qt.vector2d(p2.vx * d_ptr.particleSize(p2) / d_ptr.particleSize(particle), 0);
+                var p2py = Qt.vector2d(0, p2.vy * d_ptr.particleSize(p2) / d_ptr.particleSize(particle));
 
                 // 接下来求出粒子在碰撞方向所携带的动能，根据初中物理做力的分解:
                 // 我们假设粒子的中心点x y为其重心，则重心到碰撞点为粒子对基友碰撞所产生的力的方向
@@ -182,18 +189,18 @@ Affector {
                 p2px = p2pixi.plus(p2pixj);
                 p2py = p2piyi.plus(p2piyj);
 
-//                var oldPower = (Math.abs(particle.vx) + Math.abs(particle.vy)) * particle.startSize
-//                                + (Math.abs(p2.vx) + Math.abs(p2.vy)) * p2.startSize;
+//                var oldPower = (Math.abs(particle.vx) + Math.abs(particle.vy)) * d_ptr.particleSize(particle)
+//                                + (Math.abs(p2.vx) + Math.abs(p2.vy)) * d_ptr.particleSize(p2);
 //                console.log(particle.vx, particle.vy, p2.vx, p2.vy, oldPower)
 
                 // 重新设置粒子的速度, 快速衰减速度
                 particle.vx = p2px.x / velocityFactor / velocityFactor;
                 particle.vy = p2py.y / velocityFactor / velocityFactor;
-                p2.vx = p1px.x / p2.startSize * particle.startSize / velocityFactor / velocityFactor;
-                p2.vy = p1py.y / p2.startSize * particle.startSize / velocityFactor / velocityFactor;
+                p2.vx = p1px.x / d_ptr.particleSize(p2) * d_ptr.particleSize(particle) / velocityFactor / velocityFactor;
+                p2.vy = p1py.y / d_ptr.particleSize(p2) * d_ptr.particleSize(particle) / velocityFactor / velocityFactor;
 
-//                var newPower = (Math.abs(particle.vx) + Math.abs(particle.vy)) * particle.startSize
-//                                + (Math.abs(p2.vx) + Math.abs(p2.vy)) * p2.startSize;
+//                var newPower = (Math.abs(particle.vx) + Math.abs(particle.vy)) * d_ptr.particleSize(particle)
+//                                + (Math.abs(p2.vx) + Math.abs(p2.vy)) * d_ptr.particleSize(p2);
 
 //                console.log(particle.vx, particle.vy, p2.vx, p2.vy, newPower)
 //                console.log(p2.vx, p2.vy, p2px.x, p2py.y, p2px, p2py)

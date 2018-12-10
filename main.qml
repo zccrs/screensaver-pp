@@ -2,14 +2,8 @@ import QtQuick 2.10
 import QtQuick.Window 2.10
 import QtQuick.Particles 2.0
 
-Window {
-    id: rootWindow
-
-    width: 800
-    height: 500
-    visibility: Window.FullScreen
-    visible: true
-    color: "black"
+Item {
+    anchors.fill: parent
 
     ParticleSystem {
         id: particles
@@ -17,9 +11,10 @@ Window {
 
     ImageParticle {
         source: Qt.resolvedUrl("qrc:/pp.png")
-        colorVariation: 0.5
+        colorVariation: 0.4
         autoRotation: false
         system: particles
+        groups: ["pp"]
     }
 
     //  将粒子减速
@@ -60,6 +55,7 @@ Window {
         system: particles
         angle: 90
         magnitude: 1
+        groups: ["pp"]
     }
 
     // 气流，放到发射区域，防止泡泡都堵在发射口
@@ -70,9 +66,10 @@ Window {
             bottom: parent.bottom
         }
 
-        width: rootWindow.width / 2
-        height: rootWindow.height / 2
+        width: parent.width / 2
+        height: parent.height / 2
         strength: 50
+        groups: ["pp"]
 
 //        DebugArea {
 //            anchors.fill: parent
@@ -85,6 +82,8 @@ Window {
     TheForce {
         system: particles
         anchors.fill: parent
+        groups: ["pp"]
+        particleMargins: 0.3183183182
 
         onImpacted: {
             p1.green = [p2.red, p2.red = p1.green][0]
@@ -103,17 +102,18 @@ Window {
         system: particles
         width: size
         height: size
+        group: "pp"
 
         anchors {
             bottom: parent.bottom
             left: parent.left
         }
 
-        emitRate: 0.4
+        emitRate: 0.8
         lifeSpan: 60000
-        size: 100
+        size: 150
         sizeVariation: 10
-        velocity: AngleDirection { angle: -45; angleVariation: 30; magnitude: 200; magnitudeVariation: 50 }
+        velocity: AngleDirection { angle: -45; angleVariation: 30; magnitude: 300; magnitudeVariation: 50 }
 //        maximumEmitted: 3
 
 //        DebugArea {
