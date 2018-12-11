@@ -7,6 +7,6 @@ Standards-Version: 3.9.8
 
 Package: screensaver-pp
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, deepin-screensaver
 Description: A bubble screensaver application
  Apply to Deepin Desktop Environment.
