@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     sf.setAlphaBufferSize(8);
 
     window.setFormat(sf);
-    window.setSource(QUrl(QStringLiteral("qrc:/main.qml")));
+    window.setSource(QUrl(QStringLiteral("qrc:/deepin-screensaver/modules/pp.qml")));
     window.setColor(Qt::transparent);
     window.showFullScreen();
 

@@ -15,15 +15,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp
 
-RESOURCES += qml.qrc
+system(rcc --binary $$_PRO_FILE_PWD_/qml.qrc -o $$_PRO_FILE_PWD_/pp.rcc)
+RESOURCES += $$PWD/qml.qrc
 
-# Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
+deepin-screensaver.files += $$_PRO_FILE_PWD_/pp.rcc
+deepin-screensaver.path = /usr/lib/deepin-screensaver/resources
 
-# Additional import path used to resolve QML modules just for Qt Quick Designer
-QML_DESIGNER_IMPORT_PATH =
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
+INSTALLS += deepin-screensaver

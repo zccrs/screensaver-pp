@@ -2,15 +2,18 @@ import QtQuick 2.10
 import QtQuick.Window 2.10
 import QtQuick.Particles 2.0
 
-Item {
+import "pp"
+
+Image {
     anchors.fill: parent
+    source: "image://deepin-screensaver/screen/" + Screen.name
 
     ParticleSystem {
         id: particles
     }
 
     ImageParticle {
-        source: Qt.resolvedUrl("qrc:/pp.png")
+        source: Qt.resolvedUrl("pp/pp.png")
         colorVariation: 0.4
         autoRotation: false
         system: particles

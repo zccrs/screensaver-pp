@@ -1,0 +1,12 @@
+Source: screensaver-pp
+Section: devel
+Priority: optional
+Maintainer: Packages Builder <zccrs@live.com>
+Build-Depends: debhelper (>=9), qtbase5-dev, qtdeclarative5-dev
+Standards-Version: 3.9.8
+
+Package: screensaver-pp
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: A bubble screensaver application
+ Apply to Deepin Desktop Environment.
