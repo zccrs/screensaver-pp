@@ -5,6 +5,8 @@ import QtQuick.Particles 2.0
 import "pp"
 
 Image {
+    id: root
+
     anchors.fill: parent
     source: "image://deepin-screensaver/screen/" + Screen.name
 
@@ -69,8 +71,9 @@ Image {
             bottom: parent.bottom
         }
 
-        width: parent.width / 2
-        height: parent.height / 2
+        // 不知道为什么，属性绑定对width和height无效，只能在初始化时给定值，后期无法再次设置
+        width: Screen.width / 2
+        height: Screen.height / 2
         strength: 50
         groups: ["pp"]
 
