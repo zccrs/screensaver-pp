@@ -38,7 +38,7 @@ import QtQuick 2.0
 
 Affector {
     // 边界区域，在这个区域内才会处理粒子的边界碰撞
-    property int edgeSize: 5
+    property int edgeSize: 10
     // 粒子碰撞时的速度衰减比例
     property real velocityFactor: 1.1
     // 每次碰撞减少的生命值，单位为秒
@@ -46,6 +46,10 @@ Affector {
     // 忽略粒子的margins，取值范围为 0-1，忽略的像素 = particleMargins * particle.startSize
     // 在任何需要使用粒子大小的地方都会减去此margins
     property real particleMargins: 0
+    // 粒子出生时间不大于此时间时不对其计算内部碰撞，防止例子被阻塞在发射口
+    property real safeLife: 3
+    // 安全区域，处于此区域内的且出生时间小于安全时间的粒子不计算内部碰撞
+    property rect safeArea
     // 用于计算粒子之间的碰撞信息，求最大碰撞深度（两个物体重合部分的最大宽度），并且返回碰撞点
     // 默认的方法是用来处理圆形
     property var intersectInfo: function intersectSize(c1, c2) {
@@ -98,20 +102,28 @@ Affector {
             }
 
             // 粒子的x y是它的中心，计算这个点和四个边界的距离，处于边界范围时处理其速度
-            if (Math.abs(particle.x - thatRect.x) < edgeSize) {
+            // 下一帧的位置
+            var next_x = particle.x + particle.vx / 60;
+            var next_y = particle.y + particle.vy / 60;
+
+            if (Math.abs(particle.x - thatRect.x) < edgeSize || next_x <= thatRect.x) {
                 particle.vx = (isNewcome ? -1 : 1) * Math.abs(particle.vx / velocityFactor);
-            } else if (Math.abs(particle.x - thatRect.right) < edgeSize) {
+            } else if (Math.abs(particle.x - thatRect.right) < edgeSize || next_x >= thatRect.right) {
                 particle.vx = (isNewcome ? 1 : -1) * Math.abs(particle.vx / velocityFactor);
             }
 
-            if (Math.abs(particle.y - thatRect.y) < edgeSize) {
+            if (Math.abs(particle.y - thatRect.y) < edgeSize || next_y <= thatRect.y) {
                 particle.vy = (isNewcome ? -1 : 1) * Math.abs(particle.vy / velocityFactor);
-            } else if (Math.abs(particle.y - thatRect.bottom) < edgeSize) {
+            } else if (Math.abs(particle.y - thatRect.bottom) < edgeSize || next_y >= thatRect.bottom) {
                 particle.vy = (isNewcome ? 1 : -1) * Math.abs(particle.vy / velocityFactor);
             }
         }
 
         function particleBouce(particle, particles, i) {
+            if (particle.t <= safeLife && (!safeArea || rectContains(safeArea, Qt.point(particle.x, particle.y)))) {
+                return;
+            }
+
             var isUpdateing = particle.update;
 
             // 清理粒子的状态，如果下面检测到其和其它粒子存在交叉时会重新将状态置为true
@@ -119,6 +131,10 @@ Affector {
             // 遍历剩余的所有粒子，找出和当前粒子产生碰撞的进行处理
             for (var j = i + 1; j < particles.length; ++j) {
                 var p2 = particles[j];
+
+                if (p2.t <= safeLife && (!safeArea || rectContains(safeArea, Qt.point(p2.x, p2.y)))) {
+                    continue;
+                }
 
                 // 如果粒子已经处理碰撞更新状态，则忽略它
                 if (p2.update) {

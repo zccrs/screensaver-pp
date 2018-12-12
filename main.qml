@@ -20,6 +20,7 @@ Image {
         autoRotation: false
         system: particles
         groups: ["pp"]
+        entryEffect: ImageParticle.None
     }
 
     //  将粒子减速
@@ -65,6 +66,8 @@ Image {
 
     // 气流，放到发射区域，防止泡泡都堵在发射口
     Turbulence {
+        id: turbulence
+
         system: particles
         anchors {
             left: parent.left
@@ -74,7 +77,7 @@ Image {
         // 不知道为什么，属性绑定对width和height无效，只能在初始化时给定值，后期无法再次设置
         width: Screen.width / 2
         height: Screen.height / 2
-        strength: 50
+        strength: 100
         groups: ["pp"]
 
 //        DebugArea {
@@ -90,6 +93,7 @@ Image {
         anchors.fill: parent
         groups: ["pp"]
         particleMargins: 0.32
+        safeArea: Qt.rect(0, Screen.height - turbulence.height, turbulence.width, turbulence.height)
 
         onImpacted: {
             p1.green = [p2.red, p2.red = p1.green][0]
@@ -115,11 +119,12 @@ Image {
             left: parent.left
         }
 
-        emitRate: 0.8
+        emitRate: 1
         lifeSpan: 60000
         size: 150
         sizeVariation: 10
-        velocity: AngleDirection { angle: -45; angleVariation: 30; magnitude: 300; magnitudeVariation: 50 }
+        velocity: AngleDirection { angle: -45; angleVariation: 30; magnitude: 500; magnitudeVariation: 100 }
+        velocityFromMovement: 300
 //        maximumEmitted: 3
 
 //        DebugArea {
