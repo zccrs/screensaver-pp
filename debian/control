@@ -7,6 +7,6 @@ Standards-Version: 3.9.8
 
 Package: screensaver-pp
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, deepin-screensaver
+Depends: ${shlibs:Depends}, ${misc:Depends}, deepin-screensaver, qml-module-qtquick-particles2
 Description: A bubble screensaver application
  Apply to Deepin Desktop Environment.

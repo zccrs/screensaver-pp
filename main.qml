@@ -89,7 +89,7 @@ Image {
         system: particles
         anchors.fill: parent
         groups: ["pp"]
-        particleMargins: 0.3183183182
+        particleMargins: 0.32
 
         onImpacted: {
             p1.green = [p2.red, p2.red = p1.green][0]
