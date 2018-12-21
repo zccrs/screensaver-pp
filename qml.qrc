@@ -7,4 +7,7 @@
         <file>TheForce.qml</file>
         <file>DebugArea.qml</file>
     </qresource>
+    <qresource prefix="/deepin-screensaver/modules/cover">
+        <file alias="pp.qml.svg">pp.svg</file>
+    </qresource>
 </RCC>

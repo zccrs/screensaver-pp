@@ -122,8 +122,8 @@ Image {
 
         emitRate: 10
         lifeSpan: 60000
-        size: 150
-        sizeVariation: 10
+        size: parent.width / 12
+        sizeVariation: size / 15
         velocity: AngleDirection { angle: -30; angleVariation: 20; magnitude: 500; magnitudeVariation: 100 }
         velocityFromMovement: 300
         maximumEmitted: 10
