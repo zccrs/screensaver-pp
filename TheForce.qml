@@ -68,6 +68,8 @@ Affector {
                               c2.y - (c2.y - c1.y) * d_ptr.particleSize(c2) / pd / 2)
         }
     }
+    // 上一次处理的粒子数量
+    property int lastAffectParticleCount: 0
 
     // 粒子之间碰撞时通知，只通知内部碰撞
     signal impacted(var p1, var p2)
@@ -247,5 +249,7 @@ Affector {
             // 处理粒子到达边缘情况
             d_ptr.edgeBounce(particle);
         }
+
+        lastAffectParticleCount = particles.length
     }
 }

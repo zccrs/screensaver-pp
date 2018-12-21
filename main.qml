@@ -89,6 +89,7 @@ Image {
 
     // 让粒子在边缘处被反弹
     TheForce {
+        id: forceArea
         system: particles
         anchors.fill: parent
         groups: ["pp"]
@@ -119,13 +120,24 @@ Image {
             left: parent.left
         }
 
-        emitRate: 1
+        emitRate: 10
         lifeSpan: 60000
         size: 150
         sizeVariation: 10
-        velocity: AngleDirection { angle: -45; angleVariation: 30; magnitude: 500; magnitudeVariation: 100 }
+        velocity: AngleDirection { angle: -30; angleVariation: 20; magnitude: 500; magnitudeVariation: 100 }
         velocityFromMovement: 300
-//        maximumEmitted: 3
+        maximumEmitted: 10
+
+        Timer {
+            running: forceArea.lastAffectParticleCount < 40
+            repeat: true
+            interval: 3000
+            onTriggered: {
+                emitter.maximumEmitted = -1;
+                emitter.enabled = false;
+                emitter.burst(5);
+            }
+        }
 
 //        DebugArea {
 //            anchors.fill: parent
