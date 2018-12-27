@@ -95,6 +95,7 @@ Image {
         groups: ["pp"]
         particleMargins: 0.32
         safeArea: Qt.rect(0, Screen.height - turbulence.height, turbulence.width, turbulence.height)
+        devicePixelRatio: Screen.devicePixelRatio
 
         onImpacted: {
             p1.green = [p2.red, p2.red = p1.green][0]

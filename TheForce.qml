@@ -70,6 +70,8 @@ Affector {
     }
     // 上一次处理的粒子数量
     property int lastAffectParticleCount: 0
+    // 屏幕缩放系数
+    property real devicePixelRatio: 1
 
     // 粒子之间碰撞时通知，只通知内部碰撞
     signal impacted(var p1, var p2)
@@ -81,7 +83,8 @@ Affector {
         property int particleId: 0
 
         function particleSize(particle) {
-            return particle.startSize * (1 - particleMargins);
+            // 粒子的大小不受屏幕缩放系数的控制，所以需要处理后再计算
+            return particle.startSize / devicePixelRatio * (1 - particleMargins);
         }
 
         function rectContains(rect, point) {
@@ -104,7 +107,7 @@ Affector {
             }
 
             // 粒子的x y是它的中心，计算这个点和四个边界的距离，处于边界范围时处理其速度
-            // 下一帧的位置
+            // 下一帧的位置，假定为60帧
             var next_x = particle.x + particle.vx / 60;
             var next_y = particle.y + particle.vy / 60;
 
