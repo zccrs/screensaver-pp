@@ -123,7 +123,7 @@ Image {
 
         emitRate: 10
         lifeSpan: 60000
-        size: parent.width * Screen.devicePixelRatio * Screen.devicePixelRatio / 12
+        size: parent.width * Screen.devicePixelRatio / 12
         sizeVariation: size / 15
         velocity: AngleDirection { angle: -30; angleVariation: 20; magnitude: 500; magnitudeVariation: 100 }
         velocityFromMovement: 300
