@@ -1,5 +1,11 @@
+screensaver-pp (0.0.2) unstable; urgency=medium
+
+  * 添加缺少的依赖包
+
+ -- zccrs <zccrs@live.com>  Wed, 16 Jan 2019 09:15:02 +0800
+
 screensaver-pp (0.0.1) unstable; urgency=medium
 
   * Initial release
 
- -- Packages Builder <zccrs@live.com>  Tue, 11 Dec 2018 14:07:02 +0800
+ -- zccrs <zccrs@live.com>  Tue, 11 Dec 2018 14:07:02 +0800
