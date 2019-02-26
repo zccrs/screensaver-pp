@@ -1,3 +1,9 @@
+screensaver-pp (0.0.3) unstable; urgency=medium
+
+  * 修复高分屏上泡泡太小
+
+ -- zccrs <zccrs@live.com>  Tue, 26 Feb 2019 11:10:02 +0800
+
 screensaver-pp (0.0.2) unstable; urgency=medium
 
   * 添加缺少的依赖包
