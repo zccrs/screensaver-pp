@@ -2,7 +2,7 @@ Source: screensaver-pp
 Section: devel
 Priority: optional
 Maintainer: Packages Builder <zccrs@live.com>
-Build-Depends: debhelper (>=9), qtbase5-dev, qtdeclarative5-dev
+Build-Depends: debhelper (>=9), qtbase5-dev, qtdeclarative5-dev, qtbase5-dev-tools
 Standards-Version: 3.9.8
 
 Package: screensaver-pp
