@@ -1,14 +1,30 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
 import QtQuick.Particles 2.0
+import QtGraphicalEffects 1.0
 
 import "pp"
 
-Image {
+Item {
     id: root
 
     anchors.fill: parent
-    source: "image://deepin-screensaver/screen/" + Screen.name
+
+    Image {
+        id: back
+        anchors.fill: parent
+        source: "image://deepin-screensaver/screen/" + Screen.name
+        visible: false
+        smooth: true
+    }
+
+    GaussianBlur {
+        anchors.fill: back
+        source: back
+        radius: 16
+        samples: 4
+        cached: true
+    }
 
     ParticleSystem {
         id: particles
