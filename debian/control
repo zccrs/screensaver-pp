@@ -2,13 +2,14 @@ Source: screensaver-pp
 Section: devel
 Priority: optional
 Maintainer: Packages Builder <zccrs@live.com>
-Build-Depends: debhelper (>=9), qtbase5-dev, qtdeclarative5-dev, qtbase5-dev-tools
+Build-Depends: debhelper-compat (= 13), debhelper (>= 13.11.9),
+ qt6-base-dev, qt6-base-dev-tools, qt6-declarative-dev
 Standards-Version: 3.9.8
 
 Package: screensaver-pp
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, deepin-screensaver,
- qml-module-qtquick-particles2, qml-module-qtquick2,
- qml-module-qtquick-window2, qml-module-qtgraphicaleffects
+ qml6-module-qtquick-particles, qml6-module-qtquick,
+ qml6-module-qtquick-window, qml6-module-qt5compat-graphicaleffects
 Description: A bubble screensaver application
  Apply to Deepin Desktop Environment.
