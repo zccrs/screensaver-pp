@@ -1,11 +1,11 @@
 <RCC>
     <qresource prefix="/deepin-screensaver/modules">
         <file alias="pp.qml">main.qml</file>
+        <file>TheForce.qml</file>
+        <file>DebugArea.qml</file>
     </qresource>
     <qresource prefix="/deepin-screensaver/modules/pp">
         <file>pp.png</file>
-        <file>TheForce.qml</file>
-        <file>DebugArea.qml</file>
     </qresource>
     <qresource prefix="/deepin-screensaver/modules/cover">
         <file alias="pp.qml.svg">pp.svg</file>

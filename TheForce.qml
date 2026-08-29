@@ -1,5 +1,5 @@
-import QtQuick.Particles 2.0
-import QtQuick 2.0
+import QtQuick.Particles
+import QtQuick
 
 //REGISTER_ACCESSOR(p, v4, x, initialX);
 //REGISTER_ACCESSOR(p, v4, y, initialY);
@@ -37,6 +37,8 @@ import QtQuick 2.0
 //REGISTER_ACCESSOR(p, v4, alpha, alpha);
 
 Affector {
+    id: root
+
     // 边界区域，在这个区域内才会处理粒子的边界碰撞
     property int edgeSize: 10
     // 粒子碰撞时的速度衰减比例
@@ -70,8 +72,6 @@ Affector {
     }
     // 上一次处理的粒子数量
     property int lastAffectParticleCount: 0
-    // 屏幕缩放系数
-    property real devicePixelRatio: 1
 
     // 粒子之间碰撞时通知，只通知内部碰撞
     signal impacted(var p1, var p2)
@@ -83,8 +83,8 @@ Affector {
         property int particleId: 0
 
         function particleSize(particle) {
-            // 粒子的大小不受屏幕缩放系数的控制，所以需要处理后再计算
-            return particle.startSize / devicePixelRatio * (1 - particleMargins);
+            // Qt 6中粒子尺寸和位置都使用逻辑像素，碰撞计算无需除以屏幕缩放系数
+            return particle.startSize * (1 - root.particleMargins);
         }
 
         function rectContains(rect, point) {
@@ -92,7 +92,7 @@ Affector {
         }
 
         function edgeBounce(particle) {
-            var thatRect = Qt.rect(parent.x, parent.y, parent.width, parent.height)
+            var thatRect = Qt.rect(root.parent.x, root.parent.y, root.parent.width, root.parent.height)
             // 判断是不是从外部进来的粒子
             var isNewcome = particle.id === undefined;
 
@@ -111,21 +111,21 @@ Affector {
             var next_x = particle.x + particle.vx / 60;
             var next_y = particle.y + particle.vy / 60;
 
-            if (Math.abs(particle.x - thatRect.x) < edgeSize || next_x <= thatRect.x) {
-                particle.vx = (isNewcome ? -1 : 1) * Math.abs(particle.vx / velocityFactor);
-            } else if (Math.abs(particle.x - thatRect.right) < edgeSize || next_x >= thatRect.right) {
-                particle.vx = (isNewcome ? 1 : -1) * Math.abs(particle.vx / velocityFactor);
+            if (Math.abs(particle.x - thatRect.x) < root.edgeSize || next_x <= thatRect.x) {
+                particle.vx = (isNewcome ? -1 : 1) * Math.abs(particle.vx / root.velocityFactor);
+            } else if (Math.abs(particle.x - thatRect.right) < root.edgeSize || next_x >= thatRect.right) {
+                particle.vx = (isNewcome ? 1 : -1) * Math.abs(particle.vx / root.velocityFactor);
             }
 
-            if (Math.abs(particle.y - thatRect.y) < edgeSize || next_y <= thatRect.y) {
-                particle.vy = (isNewcome ? -1 : 1) * Math.abs(particle.vy / velocityFactor);
-            } else if (Math.abs(particle.y - thatRect.bottom) < edgeSize || next_y >= thatRect.bottom) {
-                particle.vy = (isNewcome ? 1 : -1) * Math.abs(particle.vy / velocityFactor);
+            if (Math.abs(particle.y - thatRect.y) < root.edgeSize || next_y <= thatRect.y) {
+                particle.vy = (isNewcome ? -1 : 1) * Math.abs(particle.vy / root.velocityFactor);
+            } else if (Math.abs(particle.y - thatRect.bottom) < root.edgeSize || next_y >= thatRect.bottom) {
+                particle.vy = (isNewcome ? 1 : -1) * Math.abs(particle.vy / root.velocityFactor);
             }
         }
 
         function particleBouce(particle, particles, i) {
-            if (particle.t <= safeLife && (!safeArea || rectContains(safeArea, Qt.point(particle.x, particle.y)))) {
+            if (particle.t <= root.safeLife && (!root.safeArea || rectContains(root.safeArea, Qt.point(particle.x, particle.y)))) {
                 return;
             }
 
@@ -137,7 +137,7 @@ Affector {
             for (var j = i + 1; j < particles.length; ++j) {
                 var p2 = particles[j];
 
-                if (p2.t <= safeLife && (!safeArea || rectContains(safeArea, Qt.point(p2.x, p2.y)))) {
+                if (p2.t <= root.safeLife && (!root.safeArea || rectContains(root.safeArea, Qt.point(p2.x, p2.y)))) {
                     continue;
                 }
 
@@ -147,7 +147,7 @@ Affector {
                 }
 
                 // 得到粒子的相交信息
-                var ii = intersectInfo(particle, p2);
+                var ii = root.intersectInfo(particle, p2);
 
                 if (!ii) {
                     continue;
@@ -163,7 +163,7 @@ Affector {
 
                 // 当两个粒子相交过大时，忽略其碰撞属性，让这对好基友能再愉快的生活一段时间，直到它们由于自身速度的不一致而分开
                 // 在这之前由于没有检测到粒子当前存在好基友而导致的碰撞概不负责
-                if (ii.depth > edgeSize) {
+                if (ii.depth > root.edgeSize) {
                     return;
                 }
 
@@ -215,10 +215,10 @@ Affector {
 //                console.log(particle.vx, particle.vy, p2.vx, p2.vy, oldPower)
 
                 // 重新设置粒子的速度, 快速衰减速度
-                particle.vx = p2px.x / velocityFactor / velocityFactor;
-                particle.vy = p2py.y / velocityFactor / velocityFactor;
-                p2.vx = p1px.x / d_ptr.particleSize(p2) * d_ptr.particleSize(particle) / velocityFactor / velocityFactor;
-                p2.vy = p1py.y / d_ptr.particleSize(p2) * d_ptr.particleSize(particle) / velocityFactor / velocityFactor;
+                particle.vx = p2px.x / root.velocityFactor / root.velocityFactor;
+                particle.vy = p2py.y / root.velocityFactor / root.velocityFactor;
+                p2.vx = p1px.x / d_ptr.particleSize(p2) * d_ptr.particleSize(particle) / root.velocityFactor / root.velocityFactor;
+                p2.vy = p1py.y / d_ptr.particleSize(p2) * d_ptr.particleSize(particle) / root.velocityFactor / root.velocityFactor;
 
 //                var newPower = (Math.abs(particle.vx) + Math.abs(particle.vy)) * d_ptr.particleSize(particle)
 //                                + (Math.abs(p2.vx) + Math.abs(p2.vy)) * d_ptr.particleSize(p2);
@@ -231,11 +231,11 @@ Affector {
 //                }
 
                 // 接下来处理碰撞后的生命值
-                particle.lifeSpan -= lifeElapse;
-                p2.lifeSpan -= lifeElapse;
+                particle.lifeSpan -= root.lifeElapse;
+                p2.lifeSpan -= root.lifeElapse;
 
                 // 通知外部粒子碰撞已经发生
-                impacted(particle, p2)
+                root.impacted(particle, p2)
 
                 // 一次只允许这个粒子与别的粒子碰撞一次
                 return;
@@ -243,7 +243,7 @@ Affector {
         }
     }
 
-    onAffectParticles: {
+    onAffectParticles: function(particles, dt) {
         for (var i = 0; i < particles.length; ++i) {
             var particle = particles[i];
 
@@ -253,6 +253,6 @@ Affector {
             d_ptr.edgeBounce(particle);
         }
 
-        lastAffectParticleCount = particles.length
+        root.lastAffectParticleCount = particles.length
     }
 }

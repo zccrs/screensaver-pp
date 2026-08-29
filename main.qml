@@ -1,9 +1,7 @@
-import QtQuick 2.0
-import QtQuick.Window 2.0
-import QtQuick.Particles 2.0
-import QtGraphicalEffects 1.0
-
-import "pp"
+import QtQuick
+import QtQuick.Window
+import QtQuick.Particles
+import Qt5Compat.GraphicalEffects
 
 Item {
     id: root
@@ -111,12 +109,19 @@ Item {
         groups: ["pp"]
         particleMargins: 0.32
         safeArea: Qt.rect(0, Screen.height - turbulence.height, turbulence.width, turbulence.height)
-        devicePixelRatio: Screen.devicePixelRatio
 
-        onImpacted: {
-            p1.green = [p2.red, p2.red = p1.green][0]
-            p1.blue = [p2.green, p2.green = p1.blue][0]
-            p1.red = [p2.blue, p2.blue = p1.red][0]
+        onImpacted: function(p1, p2) {
+            var p1Green = p1.green
+            var p1Blue = p1.blue
+            var p1Red = p1.red
+
+            p1.green = p2.red
+            p1.blue = p2.green
+            p1.red = p2.blue
+
+            p2.red = p1Green
+            p2.green = p1Blue
+            p2.blue = p1Red
         }
 
 //        DebugArea {
@@ -139,7 +144,7 @@ Item {
 
         emitRate: 10
         lifeSpan: 60000
-        size: 150 * Screen.devicePixelRatio
+        size: 150
         sizeVariation: size / 15
         velocity: AngleDirection { angle: -30; angleVariation: 20; magnitude: 500; magnitudeVariation: 100 }
         velocityFromMovement: 300
